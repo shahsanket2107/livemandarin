@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Build the native menu-bar app into build/Meet Captions.app (ad-hoc signed for local use).
+# Build the native menu-bar app into build/LiveMandarin.app (ad-hoc signed for local use).
 # Uses swiftc directly (no SwiftPM) and picks the newest SDK the installed compiler accepts.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-APP="$ROOT/build/Meet Captions.app"
+APP="$ROOT/build/LiveMandarin.app"
 mkdir -p "$ROOT/build"
 
 pick_sdk() {
@@ -18,15 +18,15 @@ echo "SDK: $SDK"
 
 swiftc -O -parse-as-library -sdk "$SDK" -target arm64-apple-macos14.0 \
   -framework AppKit -framework SwiftUI -framework ScreenCaptureKit -framework ServiceManagement -framework AVFoundation \
-  "$ROOT"/app/Sources/MeetCaptions/*.swift -o "$ROOT/build/MeetCaptions"
+  "$ROOT"/app/Sources/LiveMandarin/*.swift -o "$ROOT/build/LiveMandarin"
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-mv "$ROOT/build/MeetCaptions" "$APP/Contents/MacOS/MeetCaptions"
+mv "$ROOT/build/LiveMandarin" "$APP/Contents/MacOS/LiveMandarin"
 sed "s|__SERVER_DIR__|$ROOT|" "$ROOT/app/Info.plist" > "$APP/Contents/Info.plist"
 [ -f "$ROOT/app/AppIcon.icns" ] && cp "$ROOT/app/AppIcon.icns" "$APP/Contents/Resources/"
 # Sign with the local certificate if present (keeps macOS permissions across rebuilds), else ad-hoc.
-IDENTITY="Meet Captions Local"
+IDENTITY="LiveMandarin Local"
 if security find-identity -v -p codesigning | grep -q "$IDENTITY"; then
   codesign --force --sign "$IDENTITY" "$APP" >/dev/null
 else
@@ -35,7 +35,7 @@ else
 fi
 
 # Install to /Applications so Spotlight/Launchpad can find it; the running copy is replaced.
-pkill -x MeetCaptions 2>/dev/null || true
-rm -rf "/Applications/Meet Captions.app"
-ditto "$APP" "/Applications/Meet Captions.app"
-echo "Installed: /Applications/Meet Captions.app"
+pkill -x LiveMandarin 2>/dev/null || true
+rm -rf "/Applications/LiveMandarin.app"
+ditto "$APP" "/Applications/LiveMandarin.app"
+echo "Installed: /Applications/LiveMandarin.app"

@@ -115,7 +115,7 @@ class Server:
             return connection.respond(HTTPStatus.OK if self.ready else HTTPStatus.SERVICE_UNAVAILABLE,
                                       "ready\n" if self.ready else "loading\n")
         origin = request.headers.get("Origin", "")
-        if origin and origin != "app://meet-captions":  # never accept connections from web pages
+        if origin and origin != "app://livemandarin":  # never accept connections from web pages
             return connection.respond(HTTPStatus.FORBIDDEN, "forbidden\n")
         return None
 

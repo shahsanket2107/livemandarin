@@ -1,4 +1,4 @@
-# CLAUDE.md — Meet Captions
+# CLAUDE.md — LiveMandarin
 
 Local, private live-translation captions for calls on a Mac: a Swift menu-bar app captures
 system audio, a Python server runs Silero VAD → Qwen3-ASR-1.7B → CAM++ speaker embeddings →
@@ -40,13 +40,13 @@ than reproducing the steps by hand, and re-run it after fixing whatever it stopp
    `server/.venv/bin/python server/bench/stream_client.py`. Expect 14 captions, three speakers
    (S1/S2/S3), full-caption p50 ≈ 2.5 s on an M-series Mac. Stop the server afterwards
    (`lsof -ti tcp:8765 | xargs kill`) so the app can manage its own.
-4. **App:** `/Applications/Meet Captions.app` should be running (menu-bar speech bubble; no
+4. **App:** `/Applications/LiveMandarin.app` should be running (menu-bar speech bubble; no
    Dock icon — that is by design, `LSUIElement`). Ask the user to press ▶ in the panel and
    allow the **System Audio Recording** prompt. If they see *"The user declined TCCs"* or no
-   prompt: `tccutil reset ScreenCapture com.sanket.meetcaptions && tccutil reset AudioCapture
-   com.sanket.meetcaptions`, relaunch the app, press ▶ again. Confirm success from
-   `~/Library/Logs/MeetCaptions-app.log` ("audio capture started", "server link: connected")
-   and `~/Library/Logs/MeetCaptions.log` ("client connected", "audio: … frames received").
+   prompt: `tccutil reset ScreenCapture com.sanket.livemandarin && tccutil reset AudioCapture
+   com.sanket.livemandarin`, relaunch the app, press ▶ again. Confirm success from
+   `~/Library/Logs/LiveMandarin-app.log` ("audio capture started", "server link: connected")
+   and `~/Library/Logs/LiveMandarin.log` ("client connected", "audio: … frames received").
 5. **Tailor:** ask for a handful of names/products/jargon from their meetings and put them in
    `server/glossary.yaml` (`asr_hints` ≤ 30 words; `terms` for fixed translations). Set
    `caption.mode` if they mainly need English → Chinese or both directions.
@@ -71,9 +71,9 @@ them, and read the two log files for the facts.
   them as YAML (or rewrite the whole file), never with substring replacement — `speakers:` is
   a prefix of `max_speakers:`.
 - **Swift build:** `scripts/build-app.sh` compiles, signs, installs to `/Applications` and
-  kills the running instance; relaunch with `open "/Applications/Meet Captions.app"`. Grep the
+  kills the running instance; relaunch with `open "/Applications/LiveMandarin.app"`. Grep the
   build output for `error:` — warnings about `Sendable` are expected. The app must stay
-  signed with the "Meet Captions Local" identity or the user re-grants permissions each build.
+  signed with the "LiveMandarin Local" identity or the user re-grants permissions each build.
 - **Logging:** the server logs timings only (`server.log_text: false`). Do not log caption
   text by default; it is meeting content.
 - **Known non-obvious facts** (see code comments): Hy-MT2 1.8B vs 7B chat formats differ and

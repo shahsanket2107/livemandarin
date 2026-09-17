@@ -53,6 +53,6 @@ echo "==> Signing certificate and app"
 "$ROOT/scripts/build-app.sh"
 
 echo
-echo "Setup complete. Meet Captions is installed in /Applications and running in the menu bar."
+echo "Setup complete. LiveMandarin is installed in /Applications and running in the menu bar."
 echo "Press ▶ in its panel; allow the system-audio permission when macOS asks."
-open "/Applications/Meet Captions.app"
+open "/Applications/LiveMandarin.app"

@@ -44,7 +44,7 @@ async def main() -> None:
     first_ms: list[int] = []
     final_ms: list[int] = []
 
-    async with connect(args.url, origin="app://meet-captions") as ws:
+    async with connect(args.url, origin="app://livemandarin") as ws:
         print(json.loads(await ws.recv()))
         if args.mode:
             await ws.send(json.dumps({"type": "config", "mode": args.mode}))

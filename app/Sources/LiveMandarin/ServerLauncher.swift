@@ -9,7 +9,7 @@ final class ServerLauncher {
         var errorDescription: String? {
             switch self {
             case .noServerDir: return "The app doesn't know where the caption server is. Rebuild with scripts/build-app.sh."
-            case .timeout: return "The caption server didn't become ready. See ~/Library/Logs/MeetCaptions.log."
+            case .timeout: return "The caption server didn't become ready. See ~/Library/Logs/LiveMandarin.log."
             }
         }
     }
@@ -47,7 +47,7 @@ final class ServerLauncher {
     private func launch() throws {
         guard !serverDir.isEmpty, serverDir != "__SERVER_DIR__" else { throw LauncherError.noServerDir }
         let logURL = FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/Logs/MeetCaptions.log")
+            .appendingPathComponent("Library/Logs/LiveMandarin.log")
         if !FileManager.default.fileExists(atPath: logURL.path) {
             FileManager.default.createFile(atPath: logURL.path, contents: nil)
         }

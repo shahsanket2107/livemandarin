@@ -3,11 +3,11 @@ import ServiceManagement
 import SwiftUI
 
 @main
-struct MeetCaptionsApp: App {
+struct LiveMandarinApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra("Meet Captions", systemImage: "captions.bubble") {
+        MenuBarExtra("LiveMandarin", systemImage: "captions.bubble") {
             MenuContent(model: appDelegate.coordinator.model, coordinator: appDelegate.coordinator)
         }
     }
@@ -51,14 +51,14 @@ struct MenuContent: View {
             set: { on in try? on ? SMAppService.mainApp.register() : SMAppService.mainApp.unregister() }
         ))
         Divider()
-        Button("Quit Meet Captions") { NSApp.terminate(nil) }.keyboardShortcut("q")
+        Button("Quit LiveMandarin") { NSApp.terminate(nil) }.keyboardShortcut("q")
     }
 }
 
-/// Appends timestamped lines to ~/Library/Logs/MeetCaptions-app.log for troubleshooting.
+/// Appends timestamped lines to ~/Library/Logs/LiveMandarin-app.log for troubleshooting.
 enum AppLog {
     private static let url = FileManager.default.homeDirectoryForCurrentUser
-        .appendingPathComponent("Library/Logs/MeetCaptions-app.log")
+        .appendingPathComponent("Library/Logs/LiveMandarin-app.log")
     private static let queue = DispatchQueue(label: "captions.log")
 
     static func write(_ text: String) {

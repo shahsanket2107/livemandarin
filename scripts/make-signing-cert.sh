@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Create a local self-signed code-signing certificate ("Meet Captions Local") in the login
+# Create a local self-signed code-signing certificate ("LiveMandarin Local") in the login
 # keychain. build-app.sh signs the app with it, so macOS keeps the app's audio-capture
 # permission across rebuilds (an ad-hoc signature changes every build and loses it).
 # macOS may show a password prompt when the certificate is marked trusted.
 set -euo pipefail
-NAME="Meet Captions Local"
+NAME="LiveMandarin Local"
 
 if security find-identity -v -p codesigning | grep -q "$NAME"; then
   echo "Signing certificate '$NAME' already exists."

@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleName</key><string>Meet Captions</string>
-  <key>CFBundleDisplayName</key><string>Meet Captions</string>
-  <key>CFBundleIdentifier</key><string>com.sanket.meetcaptions</string>
-  <key>CFBundleExecutable</key><string>MeetCaptions</string>
+  <key>CFBundleName</key><string>LiveMandarin</string>
+  <key>CFBundleDisplayName</key><string>LiveMandarin</string>
+  <key>CFBundleIdentifier</key><string>com.sanket.livemandarin</string>
+  <key>CFBundleExecutable</key><string>LiveMandarin</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleShortVersionString</key><string>1.0</string>
   <key>CFBundleVersion</key><string>1</string>
@@ -13,9 +13,9 @@
   <key>LSUIElement</key><true/>
   <key>NSHighResolutionCapable</key><true/>
   <key>NSAudioCaptureUsageDescription</key>
-  <string>Meet Captions listens to the audio of your calls to caption them. Nothing leaves your Mac.</string>
+  <string>LiveMandarin listens to the audio of your calls to caption them. Nothing leaves your Mac.</string>
   <key>NSScreenCaptureUsageDescription</key>
-  <string>Meet Captions captures only system audio (never the screen) to caption your calls.</string>
+  <string>LiveMandarin captures only system audio (never the screen) to caption your calls.</string>
   <key>NSMicrophoneUsageDescription</key>
   <string>Optional: include your own voice in the captions. Only used if you turn on "Include my microphone".</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>

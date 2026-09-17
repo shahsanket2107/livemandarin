@@ -115,7 +115,7 @@ struct PanelView: View {
 
     private func saveTranscript() {
         let dialog = NSSavePanel()
-        dialog.nameFieldStringValue = "meet-captions-\(Date().formatted(.iso8601.year().month().day().dateSeparator(.dash))).txt"
+        dialog.nameFieldStringValue = "livemandarin-\(Date().formatted(.iso8601.year().month().day().dateSeparator(.dash))).txt"
         dialog.allowedContentTypes = [.plainText]
         NSApp.activate(ignoringOtherApps: true)
         dialog.begin { response in

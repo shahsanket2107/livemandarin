@@ -41,7 +41,7 @@ final class CaptionClient: NSObject, URLSessionWebSocketDelegate {
         guard wanted else { return }
         onState?(.connecting)
         var request = URLRequest(url: url)
-        request.setValue("app://meet-captions", forHTTPHeaderField: "Origin")
+        request.setValue("app://livemandarin", forHTTPHeaderField: "Origin")
         let task = session.webSocketTask(with: request)
         self.task = task
         task.resume()
