@@ -7,9 +7,19 @@ overview; this file is for you, Claude, working in this repo.
 
 ## If the user asks you to set this up on their Mac
 
-Do it for them end to end; they should not need to write code or run commands themselves
-except where macOS requires their own click or password. Work through this list in order and
-verify each step instead of assuming it worked.
+Do it for them end to end — clone, install every prerequisite (Homebrew packages, Ollama,
+Python, the three models, the signing certificate), build and install the app, verify it, and
+tailor the glossary. They should not need to write code or run commands themselves except
+where macOS requires their own password or click (Homebrew's installer, the Command Line Tools
+dialog, permission prompts). Work through this list in order and verify each step instead of
+assuming it worked.
+
+Requirements you are responsible for satisfying: Apple Silicon Mac, macOS ≥ 14, ≥ 8 GB free
+disk, Homebrew, Command Line Tools with a working `swiftc`, Ollama (`brew install ollama`),
+Python 3.13 (`brew install python@3.13`), ffmpeg, the Python packages in
+`server/requirements.txt`, the Hy-MT2 model in Ollama, the Qwen3-ASR model in the Hugging Face
+cache, the CAM++ model in `server/models/`. `scripts/setup.sh` does all of this; run it rather
+than reproducing the steps by hand, and re-run it after fixing whatever it stopped on.
 
 1. **Preflight (read-only):** `uname -m` must be `arm64`; `sw_vers -productVersion` ≥ 14;
    `df -h ~` has ≥ 8 GB free; `brew --version` works; `xcode-select -p` and `swiftc -version`

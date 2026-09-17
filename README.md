@@ -27,7 +27,7 @@ any app's audio ──► Meet Captions.app (ScreenCaptureKit) ──► local P
 ## Install
 
 ```bash
-git clone <this repo> && cd VoiceModel
+git clone https://github.com/shahsanket2107/meet-captions.git && cd meet-captions
 scripts/setup.sh
 ```
 

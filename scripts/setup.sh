@@ -12,7 +12,9 @@ if ! command -v brew >/dev/null; then
   echo "Homebrew is required: https://brew.sh" >&2; exit 1
 fi
 if ! xcode-select -p >/dev/null 2>&1 || ! swiftc -version >/dev/null 2>&1; then
-  echo "Apple's Command Line Tools are required. Run:  xcode-select --install   then re-run this script." >&2; exit 1
+  xcode-select --install 2>/dev/null || true
+  echo "Apple's Command Line Tools are being installed: click Install in the dialog, then re-run this script." >&2
+  exit 1
 fi
 brew list --versions ollama >/dev/null 2>&1 || brew install ollama
 brew list --versions python@3.13 >/dev/null 2>&1 || brew install python@3.13
