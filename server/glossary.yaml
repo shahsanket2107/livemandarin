@@ -1,0 +1,58 @@
+# Vocabulary for your meetings. Edit while the server runs; changes apply to the next sentence.
+#
+# asr_hints: English words people say mid-sentence (names, products, jargon). A short,
+#            relevant list roughly halves recognition errors on technical terms. Keep it to
+#            15–30 words: a long list dilutes the hints and measured as bad as none.
+# terms:     fixed Chinese → English translations, applied only when the term is spoken.
+
+asr_hints:
+  - Kubernetes
+  - Redis
+  - Grafana
+  - React
+  - TypeScript
+  - API
+  - PR
+  - sprint
+  - deploy
+  - staging
+  - schema
+  - rollback
+  - runbook
+  - polyfill
+  - code splitting
+  - dashboard
+  - latency
+  - P99
+
+terms:
+  - zh: 上线
+    en: release
+  - zh: 灰度
+    en: canary
+  - zh: 回滚
+    en: rollback
+  - zh: 联调
+    en: integration testing
+  - zh: 压测
+    en: load testing
+  - zh: 埋点
+    en: event tracking
+  - zh: 需求
+    en: requirement
+  - zh: 排期
+    en: scheduling
+  - zh: 复盘
+    en: retrospective
+  - zh: 对齐
+    en: align
+  - zh: 闭环
+    en: close the loop
+  - zh: 落地
+    en: implement
+  - zh: 排查
+    en: troubleshoot
+  - zh: 告警
+    en: alert
+  - zh: 一秒二
+    en: 1.2 seconds

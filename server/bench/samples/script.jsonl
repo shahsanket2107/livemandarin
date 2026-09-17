@@ -1,0 +1,14 @@
+{"voice": "Tingting", "zh": "大家好，我们今天主要 review 一下上个 sprint 的进度。", "en": "Hi everyone, today we'll mainly review the progress of the last sprint."}
+{"voice": "Eddy (Chinese (China mainland))", "zh": "后端这边，我们把用户服务迁移到了 Kubernetes，但是 deployment 的时候遇到了一些问题。", "en": "On the backend side, we migrated the user service to Kubernetes, but we ran into some issues during deployment."}
+{"voice": "Eddy (Chinese (China mainland))", "zh": "主要是 Redis 的连接池配置不对，高峰期的时候延迟涨到了八百毫秒。", "en": "Mainly the Redis connection pool was misconfigured, and latency went up to 800 milliseconds at peak times."}
+{"voice": "Tingting", "zh": "这个问题现在修好了吗？有没有加监控和告警？", "en": "Is this issue fixed now? Did you add monitoring and alerts?"}
+{"voice": "Eddy (Chinese (China mainland))", "zh": "已经修好了，我们在 Grafana 上加了一个 dashboard，P99 超过两百毫秒就会触发 alert。", "en": "It's fixed. We added a dashboard in Grafana, and an alert fires if P99 exceeds 200 milliseconds."}
+{"voice": "Tingting", "zh": "好的。前端那边呢？React 18 升级做得怎么样了？", "en": "Okay. What about the frontend? How is the React 18 upgrade going?"}
+{"voice": "Flo (Chinese (China mainland))", "zh": "升级基本完成了，不过有几个第三方组件不兼容，我们打算先用一个 polyfill 顶一下。", "en": "The upgrade is basically done, but a few third-party components are incompatible, so we plan to use a polyfill as a stopgap for now."}
+{"voice": "Flo (Chinese (China mainland))", "zh": "另外，首页的加载时间从三秒降到了一秒二，主要是做了 code splitting 和图片懒加载。", "en": "Also, the homepage load time dropped from three seconds to 1.2 seconds, mainly thanks to code splitting and lazy-loading images."}
+{"voice": "Tingting", "zh": "不错，这个效果很明显。那我们下周的上线计划有没有什么风险？", "en": "Nice, that's a clear improvement. Are there any risks with our release plan for next week?"}
+{"voice": "Eddy (Chinese (China mainland))", "zh": "风险主要在数据库迁移，schema 改动比较大，我建议先在 staging 环境跑一遍完整的回归测试。", "en": "The main risk is the database migration; the schema changes are fairly large, so I suggest running a full regression test in the staging environment first."}
+{"voice": "Flo (Chinese (China mainland))", "zh": "我同意，而且最好准备一个回滚方案，万一出问题可以马上切回去。", "en": "I agree, and ideally we should prepare a rollback plan so we can switch back right away if something goes wrong."}
+{"voice": "Tingting", "zh": "行，那就这么定了。小王你负责写一下 runbook，周三之前发到群里。", "en": "Alright, that's settled then. Xiao Wang, you're responsible for writing the runbook; send it to the group before Wednesday."}
+{"voice": "Eddy (Chinese (China mainland))", "zh": "没问题，我今天下班前先把初稿弄出来，大家有空帮忙看一下。", "en": "No problem, I'll get a first draft out before I leave work today; please take a look when you have time."}
+{"voice": "Tingting", "zh": "好，辛苦了。还有别的事吗？没有的话今天就先到这儿。", "en": "Great, thanks for your hard work. Anything else? If not, let's wrap up here for today."}

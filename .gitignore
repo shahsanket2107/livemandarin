@@ -1,0 +1,10 @@
+server/.venv/
+__pycache__/
+.pytest_cache/
+server/bench/samples/*.wav
+server/bench/results_*.json
+.DS_Store
+server/models/
+build/
+.claude/
+.impeccable/

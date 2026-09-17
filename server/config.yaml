@@ -1,0 +1,33 @@
+server:
+  host: 127.0.0.1
+  port: 8765
+  log_text: false   # true = also write each caption's text to the log (for debugging accuracy)
+
+asr:
+  model: mlx-community/Qwen3-ASR-1.7B-8bit   # ~2.5 GB; same accuracy as full precision
+  language: null                             # null = auto-detect (needed for mixed Chinese/English)
+
+mt:
+  ollama_url: http://127.0.0.1:11434
+  model: hf.co/tencent/Hy-MT2-1.8B-GGUF:Q8_0 # ~1.9 GB
+  temperature: 0.2
+  history_size: 3                            # previous sentences shown to the translator as context
+
+caption:
+  # Default translation direction (the app's menu can change it while running):
+  #   zh-en  Chinese (Mandarin, Cantonese, dialects, mixed) → English; other speech ignored
+  #   en-zh  English → Chinese; other speech ignored
+  #   auto   both, chosen per sentence from the detected language
+  mode: zh-en
+
+speakers:
+  enabled: true
+  model: models/speaker-campplus-zh-en.onnx   # CAM++ voice embeddings (Chinese + English), 28 MB
+  threshold: 0.7                              # cosine similarity to count as the same voice
+  min_seconds: 0.8                            # shorter utterances get no label
+  max_speakers: 8                             # beyond this, new voices map to the closest known one
+
+segmenter:
+  min_silence_ms: 400      # pause that ends a sentence
+  soft_max_s: 6.0          # after this long, a 160 ms pause is enough
+  hard_max_s: 10.0         # never wait longer than this for a caption
