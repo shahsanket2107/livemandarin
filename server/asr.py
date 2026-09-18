@@ -62,9 +62,9 @@ def _worker(model_id: str, language: str | None, conn: Connection) -> None:
         if kind == "speaking":
             speaking = payload
         elif kind == "transcribe":
-            uid, audio, context = payload
+            uid, audio, context, forced = payload
             t0 = time.perf_counter()
-            result = session.transcribe(audio, context=context, language=language)
+            result = session.transcribe(audio, context=context, language=forced or language)
             conn.send(("result", (uid, result.text.strip(), result.language or "", time.perf_counter() - t0)))
 
 
@@ -104,11 +104,12 @@ class Recognizer:
         with self._lock:
             self._conn.send(("speaking", speaking))
 
-    async def transcribe(self, audio: np.ndarray, context: str = "") -> Transcript:
+    async def transcribe(self, audio: np.ndarray, context: str = "", language: str | None = None) -> Transcript:
+        """Transcribe; `language` forces the recognizer's language for this request only."""
         loop = asyncio.get_running_loop()
         future: asyncio.Future = loop.create_future()
         with self._lock:
             uid, self._next_id = self._next_id, self._next_id + 1
             self._pending[uid] = (loop, future)
-            self._conn.send(("transcribe", (uid, audio, context)))
+            self._conn.send(("transcribe", (uid, audio, context, language)))
         return await future

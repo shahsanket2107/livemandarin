@@ -29,5 +29,6 @@ speakers:
 
 segmenter:
   min_silence_ms: 400      # pause that ends a sentence
-  soft_max_s: 6.0          # after this long, a 160 ms pause is enough
-  hard_max_s: 10.0         # never wait longer than this for a caption
+  soft_max_s: 4.5          # after this long, a short pause is enough (fast talkers get captions sooner)
+  soft_silence_ms: 120
+  hard_max_s: 8.0          # never wait longer than this for a caption

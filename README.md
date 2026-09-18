@@ -94,7 +94,7 @@ Edit `server/glossary.yaml` at any time (applies to the next sentence, no restar
 |---|---|---|
 | `caption.mode` | `zh-en` | Default direction (`zh-en`, `en-zh`, `auto`); the menu overrides it live |
 | `segmenter.min_silence_ms` | 400 | Pause that ends a sentence — lower = faster captions, more fragments |
-| `segmenter.soft_max_s` / `hard_max_s` | 6 / 10 | Long monologues are cut at a short pause after 6 s, unconditionally at 10 s |
+| `segmenter.soft_max_s` / `hard_max_s` | 4.5 / 8 | Long stretches are cut at a short pause after 4.5 s, unconditionally at 8 s |
 | `mt.history_size` | 3 | Previous sentences given to the translator as context |
 | `speakers.threshold` | 0.7 | Voice similarity to count as the same person (raise if two people merge, lower if one splits) |
 | `speakers.max_speakers` | 8 | Distinct voices tracked per session |

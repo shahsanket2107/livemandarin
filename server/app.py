@@ -197,6 +197,12 @@ class Session:
             transcript = await self.server.recognizer.transcribe(audio, self.server.glossary.hints)
             speaker = await speaker_job if speaker_job else None
             direction = direction_for(transcript.language, transcript.text) if transcript.text else None
+            if direction is None and transcript.text and ZH_EN in MODES[self.mode]:
+                # Fast or unclear Mandarin is sometimes labelled as another language; ask for Chinese explicitly.
+                retry = await self.server.recognizer.transcribe(audio, self.server.glossary.hints, language="Chinese")
+                if has_cjk(retry.text):
+                    log.info("#%d relabelled %s -> Chinese on retry", uid, transcript.language or "unknown")
+                    transcript, direction = retry, ZH_EN
             if direction in MODES[self.mode]:
                 self.text_queue.put_nowait((uid, len(audio) / 16000, t_end, transcript, speaker, direction))
             else:
