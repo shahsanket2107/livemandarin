@@ -80,6 +80,20 @@ def is_chinese(language: str, text: str) -> bool:
     return language.strip().lower() in CHINESE_LANGUAGES or has_cjk(text)
 
 
+FILLER_CHARS = set("嗯呃啊哦噢欸诶唉呀嘛吧哈额嘿唔哼")
+FILLER_WORDS = {"uh", "um", "mm", "hmm", "mmhmm", "mm-hmm", "uh-huh", "ah", "oh", "eh", "hm", "yeah", "yep", "ok", "okay"}
+
+
+def is_filler(text: str) -> bool:
+    """Backchannel noises ("嗯嗯", "呃", "uh-huh") that would only clutter the captions."""
+    core = "".join(ch for ch in text if ch.isalnum() or ch == "-").lower()
+    if not core:
+        return True
+    if all(ch in FILLER_CHARS for ch in core):
+        return True
+    return core in FILLER_WORDS
+
+
 def direction_for(language: str, text: str) -> Direction | None:
     if is_chinese(language, text):
         return ZH_EN
@@ -196,6 +210,9 @@ class Session:
             speaker_job = asyncio.to_thread(self.speakers.identify, audio) if self.speakers else None
             transcript = await self.server.recognizer.transcribe(audio, self.server.glossary.hints)
             speaker = await speaker_job if speaker_job else None
+            if transcript.text and is_filler(transcript.text):
+                await self.send({"type": "drop", "id": uid})
+                continue
             direction = direction_for(transcript.language, transcript.text) if transcript.text else None
             if direction is None and transcript.text and ZH_EN in MODES[self.mode]:
                 # Fast or unclear Mandarin is sometimes labelled as another language; ask for Chinese explicitly.

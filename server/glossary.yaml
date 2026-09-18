@@ -3,31 +3,57 @@
 # asr_hints: English words people say mid-sentence (names, products, jargon). A short,
 #            relevant list roughly halves recognition errors on technical terms. Keep it to
 #            15–30 words: a long list dilutes the hints and measured as bad as none.
-# terms:     fixed Chinese → English translations, applied only when the term is spoken.
+# terms:     fixed Chinese ↔ English translations, applied only when the term is spoken
+#            (both directions). Also use them to repair known mis-hearings, e.g. 三K → Sanket.
 
 asr_hints:
-  - Kubernetes
-  - Redis
-  - Grafana
-  - React
-  - TypeScript
-  - API
-  - PR
-  - sprint
+  - Sanket
+  - Claude Code
+  - Skill
+  - cluster
+  - backtest
+  - indicator
+  - tier one
+  - tier two
+  - tier three
   - deploy
-  - staging
-  - schema
-  - rollback
-  - runbook
-  - polyfill
-  - code splitting
+  - PR
+  - API
+  - Kubernetes
+  - Python
   - dashboard
   - latency
-  - P99
 
 terms:
+  # people & products (mis-hearings included)
+  - zh: 三K
+    en: Sanket
+  - zh: 三k
+    en: Sanket
+  - zh: CC
+    en: Claude Code
+  # quant / trading
+  - zh: 回测
+    en: backtest
+  - zh: 回撤
+    en: drawdown
+  - zh: 调参
+    en: parameter tuning
+  - zh: 指标
+    en: indicator
+  - zh: 仿真账号
+    en: paper-trading account
+  - zh: 震荡策略
+    en: range-bound strategy
+  - zh: 震荡
+    en: range-bound
+  - zh: 趋势策略
+    en: trend strategy
+  # engineering / process
   - zh: 上线
     en: release
+  - zh: 上线部署
+    en: deploy to production
   - zh: 灰度
     en: canary
   - zh: 回滚
@@ -36,8 +62,10 @@ terms:
     en: integration testing
   - zh: 压测
     en: load testing
-  - zh: 埋点
-    en: event tracking
+  - zh: 排查
+    en: troubleshoot
+  - zh: 告警
+    en: alert
   - zh: 需求
     en: requirement
   - zh: 排期
@@ -46,13 +74,5 @@ terms:
     en: retrospective
   - zh: 对齐
     en: align
-  - zh: 闭环
-    en: close the loop
   - zh: 落地
     en: implement
-  - zh: 排查
-    en: troubleshoot
-  - zh: 告警
-    en: alert
-  - zh: 一秒二
-    en: 1.2 seconds

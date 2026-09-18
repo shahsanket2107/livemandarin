@@ -8,3 +8,4 @@ server/models/
 build/
 .claude/
 .impeccable/
+livemandarin-*.txt

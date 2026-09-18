@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from app import direction_for, is_chinese  # noqa: E402
+from app import direction_for, is_chinese, is_filler  # noqa: E402
 from mt import EN_ZH, ZH_EN  # noqa: E402
 
 
@@ -26,3 +26,13 @@ def test_direction_by_language():
     assert direction_for("Chinese", "我们开会") is ZH_EN
     assert direction_for("English", "Let us start") is EN_ZH
     assert direction_for("Japanese", "はじめましょう") is None
+
+
+def test_fillers_are_dropped_but_real_speech_is_not():
+    assert is_filler("嗯。")
+    assert is_filler("呃嗯。")
+    assert is_filler("Uh-huh.")
+    assert is_filler("Mm-hmm")
+    assert not is_filler("嗯，然后确认。")
+    assert not is_filler("对。")
+    assert not is_filler("Yes, understood.")

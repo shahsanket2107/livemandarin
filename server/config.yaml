@@ -23,7 +23,7 @@ caption:
 speakers:
   enabled: true
   model: models/speaker-campplus-zh-en.onnx   # CAM++ voice embeddings (Chinese + English), 28 MB
-  threshold: 0.7                              # cosine similarity to count as the same voice
+  threshold: 0.65                             # cosine similarity to count as the same voice (real call audio is noisier than clean speech)
   min_seconds: 0.8                            # shorter utterances get no label
   max_speakers: 8                             # beyond this, new voices map to the closest known one
 
