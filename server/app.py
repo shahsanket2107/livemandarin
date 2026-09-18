@@ -37,6 +37,7 @@ from segmenter import Segmenter, SegmenterConfig, SileroVAD
 from speakers import SpeakerTracker, load_embedder
 
 ROOT = Path(__file__).resolve().parent
+SERVER_ID = "livemandarin/1"  # reported by /health so the app can spot a foreign or outdated server
 PARTIAL_INTERVAL = 0.05  # seconds between streamed caption updates
 log = logging.getLogger("app")
 
@@ -112,8 +113,8 @@ class Server:
 
     async def process_request(self, connection: ServerConnection, request: Request):
         if request.path == "/health":
-            return connection.respond(HTTPStatus.OK if self.ready else HTTPStatus.SERVICE_UNAVAILABLE,
-                                      "ready\n" if self.ready else "loading\n")
+            body = ("ready" if self.ready else "loading") + f" {SERVER_ID}\n"
+            return connection.respond(HTTPStatus.OK if self.ready else HTTPStatus.SERVICE_UNAVAILABLE, body)
         origin = request.headers.get("Origin", "")
         if origin and origin != "app://livemandarin":  # never accept connections from web pages
             return connection.respond(HTTPStatus.FORBIDDEN, "forbidden\n")

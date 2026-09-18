@@ -3,16 +3,18 @@ import Foundation
 /// Starts the Python caption server (scripts/run.sh) if it isn't already running, and waits
 /// until its models are loaded. The project directory is baked into Info.plist at build time.
 final class ServerLauncher {
-    enum Health { case ready, loading, down }
+    enum Health { case ready, loading, down, foreign }
     enum LauncherError: LocalizedError {
-        case noServerDir, timeout
+        case noServerDir, timeout, foreignServer
         var errorDescription: String? {
             switch self {
             case .noServerDir: return "The app doesn't know where the caption server is. Rebuild with scripts/build-app.sh."
             case .timeout: return "The caption server didn't become ready. See ~/Library/Logs/LiveMandarin.log."
+            case .foreignServer: return "Something else (or an old caption server) is on port 8765. Quit it and press ▶ again."
             }
         }
     }
+    private static let serverID = "livemandarin/1"
 
     private var process: Process?
     private let serverDir = Bundle.main.infoDictionary?["CaptionServerDir"] as? String ?? ""
@@ -21,7 +23,9 @@ final class ServerLauncher {
         var request = URLRequest(url: URL(string: "http://127.0.0.1:8765/health")!)
         request.timeoutInterval = 2
         do {
-            let (_, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await URLSession.shared.data(for: request)
+            let body = String(decoding: data, as: UTF8.self)
+            guard body.contains(Self.serverID) else { return .foreign }
             return (response as? HTTPURLResponse)?.statusCode == 200 ? .ready : .loading
         } catch {
             return .down
@@ -38,6 +42,7 @@ final class ServerLauncher {
             case .ready: return
             case .loading: progress("Loading speech and translation models…")
             case .down: progress("Starting caption server…")
+            case .foreign: throw LauncherError.foreignServer
             }
             try await Task.sleep(for: .seconds(1))
         }
