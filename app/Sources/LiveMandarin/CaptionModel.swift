@@ -97,8 +97,23 @@ final class CaptionModel: ObservableObject {
         }
     }
 
+    /// Server caption ids restart at 1 on every connection, so they are only meaningful within
+    /// one session. Map them to app-wide ids; reusing them directly made new captions overwrite
+    /// old ones after a reconnect or Stop/Start.
+    private var sessionIds: [Int: Int] = [:]
+    private var nextLocalId = 0
+
+    private func localId(for serverId: Int) -> Int {
+        if let id = sessionIds[serverId] { return id }
+        nextLocalId += 1
+        sessionIds[serverId] = nextLocalId
+        return nextLocalId
+    }
+
     func handle(_ message: ServerMessage) {
         switch message.type {
+        case "ready":  // new server session: its ids start over
+            sessionIds.removeAll()
         case "listening":
             speaking = true
         case "processing":
@@ -107,11 +122,11 @@ final class CaptionModel: ObservableObject {
         case "partial":
             guard let id = message.id else { return }
             pending.remove(id)
-            upsert(id: id, dst: message.dst ?? "", src: nil, dir: message.dir ?? "", live: true, speaker: message.speaker)
+            upsert(id: localId(for: id), dst: message.dst ?? "", src: nil, dir: message.dir ?? "", live: true, speaker: message.speaker)
         case "final":
             guard let id = message.id else { return }
             pending.remove(id)
-            upsert(id: id, dst: message.dst ?? "", src: message.src ?? "", dir: message.dir ?? "", live: false, speaker: message.speaker)
+            upsert(id: localId(for: id), dst: message.dst ?? "", src: message.src ?? "", dir: message.dir ?? "", live: false, speaker: message.speaker)
         case "drop":
             if let id = message.id { pending.remove(id) }
         default:

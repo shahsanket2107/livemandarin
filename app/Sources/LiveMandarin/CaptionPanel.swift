@@ -86,7 +86,7 @@ struct PanelView: View {
     private var captions: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {  // eager: lazy stacks mis-lay out rows that grow while streaming
                     if case .error(let text) = model.status {
                         Text(text)
                             .font(.system(size: 12)).foregroundStyle(Color(red: 0.99, green: 0.84, blue: 0.39))
@@ -108,8 +108,8 @@ struct PanelView: View {
                 }
                 .padding(.horizontal, 14).padding(.vertical, 6)
             }
-            .onChange(of: model.entries) { _, _ in proxy.scrollTo("bottom") }
-            .onChange(of: model.isTranscribing) { _, _ in proxy.scrollTo("bottom") }
+            .onChange(of: model.entries) { _, _ in proxy.scrollTo("bottom", anchor: .bottom) }
+            .onChange(of: model.isTranscribing) { _, _ in proxy.scrollTo("bottom", anchor: .bottom) }
         }
     }
 
