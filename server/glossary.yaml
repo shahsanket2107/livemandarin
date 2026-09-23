@@ -7,22 +7,40 @@
 #            (both directions). Also use them to repair known mis-hearings, e.g. 三K → Sanket.
 
 asr_hints:
+  # people (from the Walk-Forward meeting attendees)
   - Sanket
-  - Claude Code
-  - Skill
-  - cluster
-  - backtest
-  - indicator
+  - Rong Xian
+  - Lichi Shi
+  - Zewei Du
+  - Xiu Gao
+  - Betty
+  - Claire
+  # exchanges & data
+  - CFFEX
+  - SHFE
+  - DCE
+  - CME
+  - ICE
+  - RFQ
+  - tick
+  - snapshot
+  - backfill
+  # strategy & metrics
+  - walk-forward
+  - WFC
+  - Sharpe
+  - Calmar
+  - drawdown
   - tier one
   - tier two
   - tier three
-  - deploy
-  - PR
-  - API
-  - Kubernetes
-  - Python
-  - dashboard
-  - latency
+  # engineering
+  - Claude Code
+  - Nginx
+  - Docker Compose
+  - reverse proxy
+  - pandas
+  - cluster
 
 terms:
   # people & products (mis-hearings included)
@@ -30,26 +48,62 @@ terms:
     en: Sanket
   - zh: 三k
     en: Sanket
+  - zh: 石总
+    en: Dr. Shi
   - zh: CC
     en: Claude Code
+  - zh: 泽威
+    en: Zewei
+  - zh: 周伟
+    en: Zewei
+  - zh: 国泰君安
+    en: Guotai Junan
   # quant / trading
   - zh: 回测
     en: backtest
   - zh: 回撤
     en: drawdown
+  - zh: 最大回撤
+    en: max drawdown
   - zh: 调参
     en: parameter tuning
+  - zh: 静态参数
+    en: static parameters
+  - zh: 滚动优化
+    en: walk-forward optimization
+  - zh: 夏普
+    en: Sharpe
   - zh: 指标
     en: indicator
   - zh: 仿真账号
     en: paper-trading account
+  - zh: 仿真
+    en: simulated
+  - zh: 投资组合
+    en: portfolio
+  - zh: 期货账号
+    en: futures account
   - zh: 震荡策略
     en: range-bound strategy
   - zh: 震荡
     en: range-bound
   - zh: 趋势策略
     en: trend strategy
+  - zh: 快照
+    en: snapshot
+  - zh: 逐笔
+    en: tick-level
+  - zh: 粒度
+    en: granularity
+  - zh: 分钟级
+    en: minute-level
+  - zh: 成交量
+    en: volume
+  - zh: 回填
+    en: backfill
   # engineering / process
+  - zh: 反向代理
+    en: reverse proxy
   - zh: 上线
     en: release
   - zh: 上线部署

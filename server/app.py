@@ -107,6 +107,7 @@ class Server:
         self.config = config
         asr, mt = config["asr"], config["mt"]
         self.recognizer = Recognizer(asr["model"], asr.get("language"))
+        self.carry_context = bool(asr.get("carry_context", True))
         self.translator = Translator(mt["ollama_url"], mt["model"], mt.get("temperature", 0.2))
         self.glossary = Glossary(ROOT / "glossary.yaml")
         self.history_size = mt.get("history_size", 3)
@@ -160,6 +161,7 @@ class Session:
         self.text_queue: asyncio.Queue = asyncio.Queue()
         self.tasks: list[asyncio.Task] = []
         self.next_id = 1
+        self._last_text = ""  # previous transcript, fed back as recognizer context
         self._frames = 0
         self._peak = 0.0
 
@@ -208,7 +210,10 @@ class Session:
             self.server.glossary.refresh()
             # Voice print runs on the CPU while the recognizer uses the GPU.
             speaker_job = asyncio.to_thread(self.speakers.identify, audio) if self.speakers else None
-            transcript = await self.server.recognizer.transcribe(audio, self.server.glossary.hints)
+            hints = self.server.glossary.hints
+            if self.server.carry_context and self._last_text:
+                hints = f"{hints} {self._last_text}"
+            transcript = await self.server.recognizer.transcribe(audio, hints)
             speaker = await speaker_job if speaker_job else None
             if transcript.text and is_filler(transcript.text):
                 await self.send({"type": "drop", "id": uid})
@@ -216,11 +221,12 @@ class Session:
             direction = direction_for(transcript.language, transcript.text) if transcript.text else None
             if direction is None and transcript.text and ZH_EN in MODES[self.mode]:
                 # Fast or unclear Mandarin is sometimes labelled as another language; ask for Chinese explicitly.
-                retry = await self.server.recognizer.transcribe(audio, self.server.glossary.hints, language="Chinese")
+                retry = await self.server.recognizer.transcribe(audio, hints, language="Chinese")
                 if has_cjk(retry.text):
                     log.info("#%d relabelled %s -> Chinese on retry", uid, transcript.language or "unknown")
                     transcript, direction = retry, ZH_EN
             if direction in MODES[self.mode]:
+                self._last_text = transcript.text[-80:]
                 self.text_queue.put_nowait((uid, len(audio) / 16000, t_end, transcript, speaker, direction))
             else:
                 if transcript.text:

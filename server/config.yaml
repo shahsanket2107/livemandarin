@@ -6,6 +6,7 @@ server:
 asr:
   model: mlx-community/Qwen3-ASR-1.7B-8bit   # ~2.5 GB; same accuracy as full precision
   language: null                             # null = auto-detect (needed for mixed Chinese/English)
+  carry_context: true                        # give the recognizer the previous sentence (names/terms stay consistent)
 
 mt:
   ollama_url: http://127.0.0.1:11434
@@ -28,7 +29,9 @@ speakers:
   max_speakers: 8                             # beyond this, new voices map to the closest known one
 
 segmenter:
-  min_silence_ms: 400      # pause that ends a sentence
-  soft_max_s: 4.5          # after this long, a short pause is enough (fast talkers get captions sooner)
-  soft_silence_ms: 120
-  hard_max_s: 8.0          # never wait longer than this for a caption
+  # Measured on a real call: 400 ms chopped speech into 1–2 s fragments that the recognizer
+  # mangled ("呃，FE。" for "CFFEX and SHFE"); 700 ms yields whole sentences at ~+0.3 s latency.
+  min_silence_ms: 700      # pause that ends a sentence
+  soft_max_s: 8.0          # after this long, a short pause is enough
+  soft_silence_ms: 200
+  hard_max_s: 12.0         # never wait longer than this for a caption
