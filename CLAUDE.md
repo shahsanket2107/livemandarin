@@ -30,15 +30,16 @@ than reproducing the steps by hand, and re-run it after fixing whatever it stopp
    - *"SDK is not supported by the compiler"* from `swiftc`: the Command Line Tools are stale.
      Fix: `sudo mv /Library/Developer/CommandLineTools /Library/Developer/CommandLineTools.old`
      (they type the password) then `xcode-select --install`; re-run setup.
-   - `swift build`/SwiftPM is not used — `build-app.sh` compiles with `swiftc` directly and
-     picks the newest SDK the compiler accepts. Do not convert the build to SwiftPM.
+   - The build uses `swiftc` directly, not SwiftPM, because SwiftPM's manifest tooling fails
+     with some Command Line Tools versions; `build-app.sh` picks the newest SDK the compiler
+     accepts. Keep it that way.
    - `security add-trusted-cert` may pop a password dialog — that is macOS, expected.
 3. **Verify the server without the app:** `server/.venv/bin/python -m pytest -q server/tests`
    must pass. Then `scripts/run.sh` in the background, wait for `curl -s
    http://127.0.0.1:8765/health` → `ready`, run `server/.venv/bin/python
    server/bench/make_samples.py` (needs `say` + ffmpeg) and
    `server/.venv/bin/python server/bench/stream_client.py`. Expect 14 captions, three speakers
-   (S1/S2/S3), full-caption p50 ≈ 2.5 s on an M-series Mac. Stop the server afterwards
+   (S1/S2/S3), full-caption p50 around 2.5–3 s on an M-series Mac. Stop the server afterwards
    (`lsof -ti tcp:8765 | xargs kill`) so the app can manage its own.
 4. **App:** `/Applications/LiveMandarin.app` should be running (menu-bar speech bubble; no
    Dock icon — that is by design, `LSUIElement`). Ask the user to press ▶ in the panel and
@@ -65,8 +66,8 @@ them, and read the two log files for the facts.
   sides together; `bench/stream_client.py` is the reference client.
 - **Tests:** `server/.venv/bin/python -m pytest -q server/tests` — no models needed; keep them
   fast. Add a test when you touch segmentation, prompt building, speaker clustering, language
-  routing, or the YAML files (`test_config.py` guards against malformed config edits — a
-  botched YAML edit once took the whole pipeline down silently).
+  routing, or the YAML files (`test_config.py` catches malformed config edits, which otherwise
+  stop the server without a visible error).
 - **Config edits:** `config.yaml` and `glossary.yaml` are read by both humans and code. Edit
   them as YAML (or rewrite the whole file), never with substring replacement — `speakers:` is
   a prefix of `max_speakers:`.
