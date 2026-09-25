@@ -1,0 +1,40 @@
+{"zh": "Sanket，你把walk-forward的回测结果发到群里吧。", "en": "Sanket, please send the walk-forward backtest results to the group.", "terms": ["Sanket", "walk-forward", "回测"]}
+{"zh": "Rong Xian说这个RFQ的数据要先做回填。", "en": "Rong Xian said this RFQ data needs to be backfilled first.", "terms": ["Rong Xian", "RFQ", "回填"]}
+{"zh": "石总觉得静态参数的夏普比滚动优化的高。", "en": "Dr. Shi thinks the Sharpe of the static parameters is higher than the walk-forward optimization.", "terms": ["石总", "静态参数", "夏普", "滚动优化"]}
+{"zh": "Zewei，你看一下CFFEX和SHFE的快照数据有没有断。", "en": "Zewei, check whether the CFFEX and SHFE snapshot data has any gaps.", "terms": ["Zewei", "CFFEX", "SHFE", "快照"]}
+{"zh": "CME和ICE推送的是逐笔数据，不是快照。", "en": "CME and ICE push tick-level data, not snapshots.", "terms": ["CME", "ICE", "逐笔", "快照"]}
+{"zh": "这个策略的最大回撤是百分之十二，Calmar比较低。", "en": "The max drawdown of this strategy is twelve percent, and the Calmar is fairly low.", "terms": ["最大回撤", "Calmar"]}
+{"zh": "Betty和Claire负责把volume bar的指标迁移到117上。", "en": "Betty and Claire are responsible for migrating the volume bar indicator to 117.", "terms": ["Betty", "Claire", "指标"]}
+{"zh": "我用Claude Code把pandas的脚本改成tier one的模板了。", "en": "I used Claude Code to convert the pandas script into the tier one template.", "terms": ["Claude Code", "pandas", "tier one"]}
+{"zh": "反向代理用Nginx，放在Docker Compose里面跑。", "en": "Use Nginx for the reverse proxy and run it in Docker Compose.", "terms": ["反向代理", "Nginx", "Docker Compose"]}
+{"zh": "Lichi Shi会把需求写成文档，然后发给大家。", "en": "Lichi Shi will write the requirements as a document and send it to everyone.", "terms": ["Lichi Shi", "需求"]}
+{"zh": "仿真账号上先跑一周，没问题再上线。", "en": "Run it on the paper-trading account for a week first, and release it if there are no problems.", "terms": ["仿真账号", "上线"]}
+{"zh": "Xiu Gao，国泰君安那个期货账号绑定的是哪个策略？", "en": "Xiu Gao, which strategy is the Guotai Junan futures account bound to?", "terms": ["Xiu Gao", "国泰君安", "期货账号"]}
+{"zh": "tier two和tier three的链路已经打通了。", "en": "The link between tier two and tier three is already working.", "terms": ["tier two", "tier three"]}
+{"zh": "分钟级的粒度不够，我们要看成交量的分布。", "en": "Minute-level granularity is not enough; we need to look at the volume distribution.", "terms": ["分钟级", "粒度", "成交量"]}
+{"zh": "这个震荡策略在趋势行情里亏得很厉害。", "en": "This range-bound strategy loses a lot in trending markets.", "terms": ["震荡策略"]}
+{"zh": "调参的时候不要只看夏普，也要看回撤。", "en": "When tuning parameters, don't only look at the Sharpe, also look at the drawdown.", "terms": ["调参", "夏普", "回撤"]}
+{"zh": "Sanket提的那个问题，Rong Xian已经修好了。", "en": "The issue Sanket raised has already been fixed by Rong Xian.", "terms": ["Sanket", "Rong Xian"]}
+{"zh": "CC跑完以后你检查一下它写的Python代码。", "en": "After Claude Code finishes, check the Python code it wrote.", "terms": ["CC"]}
+{"zh": "我们把RFQ当成全局的cluster层来用。", "en": "We use RFQ as the global cluster layer.", "terms": ["RFQ", "cluster"]}
+{"zh": "这个walk-forward版本的收益只有百分之十七。", "en": "The return of this walk-forward version is only seventeen percent.", "terms": ["walk-forward"]}
+{"zh": "DCE的数据推送频率是每秒两次。", "en": "DCE pushes data twice per second.", "terms": ["DCE"]}
+{"zh": "石总说下周要看到新的指标上线。", "en": "Dr. Shi said he wants to see the new indicator released next week.", "terms": ["石总", "指标", "上线"]}
+{"zh": "Zewei演示了怎么在monitor里画ADJ close。", "en": "Zewei demonstrated how to plot ADJ close in the monitor.", "terms": ["Zewei"]}
+{"zh": "先回测四千根bar，再用滚动优化验证。", "en": "First backtest four thousand bars, then validate with walk-forward optimization.", "terms": ["回测", "滚动优化"]}
+{"zh": "Claire，你那边的Docker镜像更新了吗？", "en": "Claire, has your Docker image been updated?", "terms": ["Claire"]}
+{"zh": "服务器一百点八上的推理服务要加个反向代理。", "en": "The inference service on server 100.8 needs a reverse proxy.", "terms": ["反向代理"]}
+{"zh": "Betty，你把OFI flow和OI delta的图也加上。", "en": "Betty, add the OFI flow and OI delta charts too.", "terms": ["Betty"]}
+{"zh": "这个问题Lichi Shi两周前就提出来了。", "en": "Lichi Shi raised this issue two weeks ago.", "terms": ["Lichi Shi"]}
+{"zh": "我们决定继续用静态参数，不切到walk-forward。", "en": "We decided to keep using static parameters and not switch to walk-forward.", "terms": ["静态参数", "walk-forward"]}
+{"zh": "Sanket，你学一下新的monitor怎么用。", "en": "Sanket, learn how to use the new monitor.", "terms": ["Sanket"]}
+{"zh": "Xiu Gao说SHFE今天有一段数据缺失。", "en": "Xiu Gao said SHFE had a gap in the data today.", "terms": ["Xiu Gao", "SHFE"]}
+{"zh": "回填的时候注意不要把逐笔数据弄丢。", "en": "When backfilling, be careful not to lose the tick-level data.", "terms": ["回填", "逐笔"]}
+{"zh": "Rong Xian会把zip文件发给你。", "en": "Rong Xian will send you the zip file.", "terms": ["Rong Xian"]}
+{"zh": "CFFEX的快照是间隔驱动的，每半秒一次。", "en": "CFFEX snapshots are interval-driven, once every half second.", "terms": ["CFFEX", "快照"]}
+{"zh": "用pandas算完以后再写进tier one。", "en": "Compute it with pandas and then write it into tier one.", "terms": ["pandas", "tier one"]}
+{"zh": "这个指标的粒度等于六十，就是分钟级。", "en": "The granularity of this indicator equals sixty, which is minute-level.", "terms": ["指标", "粒度", "分钟级"]}
+{"zh": "期货账号YX开头的那个绑的是静态版本。", "en": "The futures account starting with YX is bound to the static version.", "terms": ["期货账号"]}
+{"zh": "Nginx配好以后，把universal URL发给Sanket。", "en": "After Nginx is configured, send the universal URL to Sanket.", "terms": ["Nginx", "Sanket"]}
+{"zh": "Zewei，CME的逐笔数据一毫秒能推几千次。", "en": "Zewei, CME tick data can push thousands of times in one millisecond.", "terms": ["Zewei", "CME", "逐笔"]}
+{"zh": "石总要Calmar和夏普两个指标一起看。", "en": "Dr. Shi wants to look at both the Calmar and Sharpe metrics together.", "terms": ["石总", "Calmar", "夏普"]}

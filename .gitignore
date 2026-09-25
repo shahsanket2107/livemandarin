@@ -21,3 +21,5 @@ Walk-Forward*
 apple-bench/data/
 apple-bench/probe
 apple-bench/applerun
+apple-bench/.venv/
+apple-bench/.venv-comet/
